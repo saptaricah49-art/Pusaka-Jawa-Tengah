@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pusaka Jateng | Pelestarian Sejarah</title>
+    <!-- Tambahan Font Klasik -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         /* --- CSS Reset & Variables --- */
         :root {
-            --primary-color: #5C4033;
-            --secondary-color: #8B5A2B;
-            --accent-color: #D4AF37; /* Kuning Emas */
+            --primary-color: #4A2C11; /* Cokelat Sogan / Klasik Jawa */
+            --secondary-color: #8B4513; /* Merah Bata / Terakota */
+            --accent-color: #D4AF37; /* Kuning Emas Keraton */
             --bg-color: #Fdfbf7;
             --text-color: #333;
         }
@@ -17,54 +19,124 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             scroll-behavior: smooth; /* Smooth scrolling */
         }
         body {
-            background-color: var(--bg-color);
+            /* Menggunakan warna dan tekstur Kertas Tua dipadu dengan motif Batik Kawung */
+            background-color: #f4e9d8;
+            background-image: 
+                url('https://www.transparenttextures.com/patterns/old-paper.png'),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg stroke='%234A2C11' stroke-width='1.5' stroke-opacity='0.08' fill='none'%3E%3Ccircle cx='0' cy='0' r='50'/%3E%3Ccircle cx='100' cy='0' r='50'/%3E%3Ccircle cx='0' cy='100' r='50'/%3E%3Ccircle cx='100' cy='100' r='50'/%3E%3Ccircle cx='50' cy='50' r='50'/%3E%3Cpath d='M40 50 L50 40 L60 50 L50 60 Z' fill='%234A2C11' fill-opacity='0.05'/%3E%3Cpath d='M-10 0 L0 -10 L10 0 L0 10 Z' fill='%234A2C11' fill-opacity='0.05'/%3E%3Cpath d='M90 0 L100 -10 L110 0 L100 10 Z' fill='%234A2C11' fill-opacity='0.05'/%3E%3Cpath d='M-10 100 L0 90 L10 100 L0 110 Z' fill='%234A2C11' fill-opacity='0.05'/%3E%3Cpath d='M90 100 L100 90 L110 100 L100 110 Z' fill='%234A2C11' fill-opacity='0.05'/%3E%3C/g%3E%3C/svg%3E");
             color: var(--text-color);
             line-height: 1.6;
             overflow-x: hidden;
         }
 
+        h1, h2, h3, .section-title, .card-title, .law-quote {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* --- Preloader --- */
+        #preloader {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #3b2314;
+            background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+            z-index: 100000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        #preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .preloader-content {
+            text-align: center;
+            color: var(--accent-color);
+        }
+        .gunungan-loader {
+            width: 120px;
+            height: 180px;
+            margin: 0 auto 20px;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 150' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 5 C 80 50, 95 100, 95 145 L 5 145 C 5 100, 20 50, 50 5 Z' fill='%234A2C11'/%3E%3Cpath d='M50 15 C 70 55, 85 100, 85 145 L 15 145 C 15 100, 30 55, 50 15 Z' fill='none' stroke='%23D4AF37' stroke-width='2'/%3E%3Cpath d='M50 145 V 80' stroke='%23D4AF37' stroke-width='3'/%3E%3Cpath d='M50 110 C 35 110, 20 90, 25 70' stroke='%23D4AF37' stroke-width='2' fill='none'/%3E%3Cpath d='M50 110 C 65 110, 80 90, 75 70' stroke='%23D4AF37' stroke-width='2' fill='none'/%3E%3Cpath d='M50 80 C 35 80, 30 60, 35 45' stroke='%23D4AF37' stroke-width='2' fill='none'/%3E%3Cpath d='M50 80 C 65 80, 70 60, 65 45' stroke='%23D4AF37' stroke-width='2' fill='none'/%3E%3Ccircle cx='50' cy='80' r='3' fill='%23D4AF37'/%3E%3Ccircle cx='25' cy='70' r='2' fill='%23D4AF37'/%3E%3Ccircle cx='75' cy='70' r='2' fill='%23D4AF37'/%3E%3Ccircle cx='35' cy='45' r='2' fill='%23D4AF37'/%3E%3Ccircle cx='65' cy='45' r='2' fill='%23D4AF37'/%3E%3Ccircle cx='50' cy='15' r='2' fill='%23D4AF37'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            animation: pulseGunungan 1.5s infinite alternate;
+        }
+        @keyframes pulseGunungan {
+            0% { transform: scale(0.95); filter: drop-shadow(0 0 5px rgba(212,175,55,0.4)); }
+            100% { transform: scale(1.05); filter: drop-shadow(0 0 20px rgba(212,175,55,1)); }
+        }
+
         /* --- Navigation --- */
         header {
-            background-color: #EEEEEE; 
-            color: var(--text-color);
-            padding: 0.5rem 5%;
+            /* Menerapkan gaya Bilah Navigasi Ukiran Kayu */
+            background-color: #3b2314; 
+            background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+            color: white;
+            padding: 1.2rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 1000;
+            /* Membuat efek bingkai ukiran 3D */
+            border-bottom: 5px solid #1a0f08;
+            border-top: 5px solid #1a0f08;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.6), inset 0 2px 5px rgba(255,255,255,0.1);
         }
         header h1 {
-            font-size: 1.5rem;
+            font-size: 2rem;
             color: var(--accent-color);
             cursor: pointer;
-            user-select: none; /* Mencegah teks terblokir saat diketuk cepat */
-            -webkit-tap-highlight-color: transparent; /* Menghilangkan efek blok warna saat ditap di HP */
+            user-select: none; 
+            -webkit-tap-highlight-color: transparent; 
+            /* Efek emas timbul seperti pada Logo Utama */
+            text-shadow: 2px 2px 0px #1a0f08, 4px 4px 8px rgba(0,0,0,0.8);
+            letter-spacing: 1.5px;
+            display: flex;
+            align-items: center;
+        }
+        header h1::before {
+            content: 'ꦥꦸꦱꦏ '; /* Aksara Jawa "Pusaka" */
+            font-size: 1.6rem;
+            margin-right: 12px;
+            color: #d4af37;
+            font-weight: normal;
+            opacity: 0.9;
         }
         nav ul {
             list-style: none;
             display: flex;
-            gap: 1.5rem;
+            gap: 0.5rem;
         }
         nav a {
-            color: var(--text-color);
+            color: #d4af37;
             text-decoration: none;
-            font-weight: normal; 
-            transition: color 0.3s;
-            padding: 0.5rem; 
+            font-weight: 600; 
+            /* Gaya teks navigasi menyesuaikan referensi (Kapital & Berjarak) */
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            padding: 0.6rem 1rem; 
+            border-radius: 4px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
         }
         nav a:hover {
-            color: var(--primary-color);
+            color: #fff;
+            background-color: rgba(212, 175, 55, 0.15);
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
         }
         nav li.active a {
-            background-color: #666666; 
-            color: white;
-            border-radius: 4px; 
+            background-color: rgba(26, 15, 8, 0.6); /* Warna kayu sangat gelap */
+            color: #fff;
+            border: 1px solid #d4af37;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.8);
         }
 
         /* --- HERO SECTION WITH MANUAL SLIDER --- */
@@ -77,6 +149,8 @@
             justify-content: center;
             text-align: center;
             color: white;
+            /* Touch action for smoother swipe experience on mobile */
+            touch-action: pan-y;
         }
 
         .hero-slider {
@@ -217,9 +291,20 @@
         }
         .section-title {
             text-align: center;
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: var(--primary-color);
             margin-bottom: 3rem;
+            position: relative;
+        }
+        /* Menambahkan ornamen pemisah gaya Jawa di bawah judul */
+        .section-title::after {
+            content: '❖ ❖ ❖';
+            display: block;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            margin-top: 15px;
+            letter-spacing: 10px;
+            opacity: 0.8;
         }
 
         /* Tentang Section */
@@ -392,8 +477,12 @@
             color: var(--primary-color);
             box-shadow: 0 6px 15px rgba(0,0,0,0.15);
         }
-        .contact-icon {
-            font-size: 1.5rem;
+        .contact-icon-svg {
+            color: var(--accent-color);
+            transition: transform 0.3s;
+        }
+        .contact-item:hover .contact-icon-svg {
+            transform: scale(1.1);
         }
 
         /* --- Easter Egg Modal --- */
@@ -458,6 +547,89 @@
             100% { transform: translateY(0px); }
         }
 
+        /* --- Ornamen Wayang Pojok --- */
+        .wayang-corner {
+            position: fixed;
+            width: 15vw;
+            max-width: 140px;
+            min-width: 80px;
+            height: 22.5vw;
+            max-height: 210px;
+            min-height: 120px;
+            /* Menggunakan SVG inline bergambar Gunungan Wayang agar tidak pernah rusak/hilang */
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 150' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 5 C 80 50, 95 100, 95 145 L 5 145 C 5 100, 20 50, 50 5 Z' fill='%234A2C11'/%3E%3Cpath d='M50 15 C 70 55, 85 100, 85 145 L 15 145 C 15 100, 30 55, 50 15 Z' fill='none' stroke='%23D4AF37' stroke-width='2'/%3E%3Cpath d='M50 145 V 80' stroke='%23D4AF37' stroke-width='3'/%3E%3Cpath d='M50 110 C 35 110, 20 90, 25 70' stroke='%23D4AF37' stroke-width='2' fill='none'/%3E%3Cpath d='M50 110 C 65 110, 80 90, 75 70' stroke='%23D4AF37' stroke-width='2' fill='none'/%3E%3Cpath d='M50 80 C 35 80, 30 60, 35 45' stroke='%23D4AF37' stroke-width='2' fill='none'/%3E%3Cpath d='M50 80 C 65 80, 70 60, 65 45' stroke='%23D4AF37' stroke-width='2' fill='none'/%3E%3Ccircle cx='50' cy='80' r='3' fill='%23D4AF37'/%3E%3Ccircle cx='25' cy='70' r='2' fill='%23D4AF37'/%3E%3Ccircle cx='75' cy='70' r='2' fill='%23D4AF37'/%3E%3Ccircle cx='35' cy='45' r='2' fill='%23D4AF37'/%3E%3Ccircle cx='65' cy='45' r='2' fill='%23D4AF37'/%3E%3Ccircle cx='50' cy='15' r='2' fill='%23D4AF37'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.15; /* Sedikit transparan agar tidak mengganggu bacaan */
+            z-index: 9998;
+            pointer-events: none; /* Agar tidak menghalangi klik tombol */
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
+        }
+        
+        /* Memutar ornamen agar mengarah ke tengah layar */
+        .wayang-top-left { top: -15px; left: -15px; transform: rotate(135deg); }
+        .wayang-top-right { top: -15px; right: -15px; transform: rotate(-135deg); }
+        .wayang-bottom-left { bottom: -15px; left: -15px; transform: rotate(45deg); }
+        .wayang-bottom-right { bottom: -15px; right: -15px; transform: rotate(-45deg); }
+
+        /* --- Animasi Scroll & Back to Top & Hamburger --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--accent-color);
+            color: #1a0f08;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid #1a0f08;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .back-to-top.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            background-color: #fff;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        .hamburger span {
+            width: 30px;
+            height: 3px;
+            background-color: var(--accent-color);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
         /* --- Mascot Popup --- */
         .mascot-container {
             position: fixed;
@@ -503,28 +675,94 @@
 
         /* Footer */
         footer {
-            background-color: var(--primary-color);
-            color: white;
+            background-color: #3b2314;
+            background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+            color: var(--accent-color);
             text-align: center;
-            padding: 1.5rem;
-            font-size: 0.9rem;
+            padding: 2rem 5%;
+            font-size: 0.95rem;
+            border-top: 5px solid #1a0f08;
+            box-shadow: inset 0 2px 5px rgba(255,255,255,0.1);
+            position: relative;
+            z-index: 10;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            letter-spacing: 1px;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            nav ul { display: none; }
             .hero-content h2 { font-size: 2.2rem; }
             .hero-content p { font-size: 1rem; }
             .slider-arrow { font-size: 2rem; }
             .action-container { flex-direction: column; }
+            
+            /* Hamburger Menu Styles */
+            .hamburger {
+                display: flex;
+            }
+            nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: #3b2314;
+                background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+                border-top: 2px solid var(--accent-color);
+                border-bottom: 2px solid var(--accent-color);
+                box-shadow: 0 10px 15px rgba(0,0,0,0.5);
+                transform: translateY(-150%);
+                opacity: 0;
+                pointer-events: none;
+                transition: all 0.4s ease;
+                z-index: 999;
+            }
+            nav.active {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                padding: 1.5rem 0;
+                gap: 1.5rem;
+            }
+            .hamburger.active span:nth-child(1) {
+                transform: translateY(9px) rotate(45deg);
+            }
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active span:nth-child(3) {
+                transform: translateY(-9px) rotate(-45deg);
+            }
         }
     </style>
 </head>
 <body>
 
+    <!-- Layar Pemuatan Awal (Preloader) -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="gunungan-loader"></div>
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; letter-spacing: 2px; text-shadow: 1px 1px 4px rgba(0,0,0,0.5);">Membuka Gapura...</h2>
+        </div>
+    </div>
+
+    <!-- Ornamen Wayang di 4 Sudut Layar -->
+    <div class="wayang-corner wayang-top-left"></div>
+    <div class="wayang-corner wayang-top-right"></div>
+    <div class="wayang-corner wayang-bottom-left"></div>
+    <div class="wayang-corner wayang-bottom-right"></div>
+
     <header>
         <h1 id="logo-title" title="Ada rahasia di sini...">Ambatukam</h1>
-        <nav>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav id="nav-menu">
             <ul>
                 <li class="active"><a href="#hero">Home</a></li>
                 <li><a href="#tentang">About</a></li>
@@ -537,7 +775,7 @@
     </header>
 
     <section id="hero">
-        <div class="hero-slider">
+        <div class="hero-slider" id="hero-slider-swipe">
            <div class="slide" style="background-image: url('image_3.png');"></div>
             <div class="slide" style="background-image: url('image_4.png');"></div>
             <div class="slide" style="background-image: url('image_5.png');"></div>
@@ -701,12 +939,16 @@
         
         <div class="contact-container">
             <a href="mailto:saptaricah49@gmail.com" class="contact-item">
-                <span class="contact-icon">📧</span>
+                <svg class="contact-icon-svg" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                 saptaricah49@gmail.com
             </a>
             <a href="https://www.instagram.com/ricahyos?utm_source=qr&igsh=YjVrZ2RwZGJjdnQy" target="_blank" class="contact-item">
-                <span class="contact-icon">📸</span>
+                <svg class="contact-icon-svg" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                 @RICAHYOS
+            </a>
+            <a href="https://www.instagram.com/eksambroow?igsh=eGF1M29hdWZ6ZmU0" target="_blank" class="contact-item">
+                <svg class="contact-icon-svg" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                @eksambroow
             </a>
         </div>
     </section>
@@ -725,18 +967,31 @@
 
     <!-- Mascot Popup Imut -->
     <div id="cute-mascot" class="mascot-container">
-        <div class="mascot-speech">Halo!, Sayang Mari kita bersama jaga warisan budaya Jateng ya! ✨</div>
-        <img src="image_e40fe3.png" alt="Maskot Imut" class="mascot-character">
+        <div class="mascot-speech">Sugeng Rawuh, Sobat Pusaka! Mari bersama jaga warisan budaya Jateng ya! ✨</div>
+        <img src="image_e40fe3.png" alt="Mascot Wayang Imut" class="mascot-character">
     </div>
+
+    <!-- Tombol Kembali ke Atas -->
+    <button id="backToTop" class="back-to-top" title="Kembali ke atas">↑</button>
 
     <footer>
         <p>&copy; 2026 Pusaka Jateng - Didik Generasi, Rawat Tradisi.</p>
     </footer>
 
     <script>
+        // Logika Penghilang Layar Pemuatan Awal (Preloader)
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            // Menunggu 1 detik tambahan agar animasi wayang terlihat lebih epik
+            setTimeout(() => {
+                if (preloader) preloader.classList.add('hidden');
+            }, 1000);
+        });
+
         document.addEventListener('DOMContentLoaded', () => {
             // --- Logika Slider ---
             const slider = document.querySelector('.hero-slider');
+            const sliderSwipeArea = document.getElementById('hero-slider-swipe');
             const slides = document.querySelectorAll('.slide');
             const prevBtn = document.getElementById('prevBtn');
             const nextBtn = document.getElementById('nextBtn');
@@ -746,19 +1001,22 @@
             const slideCount = slides.length;
             let autoSlideInterval;
 
-            for (let i = 0; i < slideCount; i++) {
-                const dot = document.createElement('div');
-                dot.classList.add('pagination-dot');
-                if (i === currentIndex) dot.classList.add('active');
-                dot.dataset.index = i; 
-                dotsContainer.appendChild(dot);
+            if (dotsContainer) {
+                for (let i = 0; i < slideCount; i++) {
+                    const dot = document.createElement('div');
+                    dot.classList.add('pagination-dot');
+                    if (i === currentIndex) dot.classList.add('active');
+                    dot.dataset.index = i; 
+                    dotsContainer.appendChild(dot);
+                }
             }
+            
             const dots = document.querySelectorAll('.pagination-dot');
 
             function updateSliderPosition() {
-                slider.style.transform = `translateX(-${(currentIndex * 100) / slideCount}%)`;
+                if (slider) slider.style.transform = `translateX(-${(currentIndex * 100) / slideCount}%)`;
                 dots.forEach(dot => dot.classList.remove('active'));
-                dots[currentIndex].classList.add('active');
+                if (dots[currentIndex]) dots[currentIndex].classList.add('active');
             }
 
             function goToSlide(index) {
@@ -772,15 +1030,39 @@
             function prevSlide() { goToSlide(currentIndex - 1); }
             function nextSlide() { goToSlide(currentIndex + 1); }
 
-            prevBtn.addEventListener('click', prevSlide);
-            nextBtn.addEventListener('click', nextSlide);
+            // Menggunakan Optional Chaining (?.) untuk mencegah error
+            prevBtn?.addEventListener('click', prevSlide);
+            nextBtn?.addEventListener('click', nextSlide);
 
-            dotsContainer.addEventListener('click', (event) => {
+            dotsContainer?.addEventListener('click', (event) => {
                 if (event.target.classList.contains('pagination-dot')) {
                     const dotIndex = parseInt(event.target.dataset.index, 10);
                     goToSlide(dotIndex);
                 }
             });
+
+            // --- Logika Geser (Swipe) untuk Pengguna Mobile ---
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            sliderSwipeArea?.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, {passive: true});
+
+            sliderSwipeArea?.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, {passive: true});
+
+            function handleSwipe() {
+                const swipeThreshold = 50; // Batas jarak swipe
+                if (touchEndX < touchStartX - swipeThreshold) {
+                    nextSlide(); // Geser ke kiri -> gambar selanjutnya
+                }
+                if (touchEndX > touchStartX + swipeThreshold) {
+                    prevSlide(); // Geser ke kanan -> gambar sebelumnya
+                }
+            }
 
             function startAutoSlide() {
                 autoSlideInterval = setInterval(nextSlide, 7000); 
@@ -791,11 +1073,14 @@
                 startAutoSlide();
             }
 
-            startAutoSlide(); 
+            if (slideCount > 0) {
+                startAutoSlide(); 
+            }
             
             // --- Logika Easter Egg ---
             const easterModal = document.getElementById('easter-egg-modal');
             const closeEasterBtn = document.getElementById('close-easter-btn');
+            const logoTitle = document.getElementById('logo-title');
 
             // 1. Trigger Keyboard (Untuk Desktop)
             const secretCode = "pusaka";
@@ -810,39 +1095,36 @@
                     inputSequence = inputSequence.slice(-secretCode.length);
                 }
 
-                if (inputSequence === secretCode) {
+                if (inputSequence === secretCode && easterModal) {
                     easterModal.style.display = 'flex';
                     inputSequence = ""; 
                 }
             });
 
             // 2. Trigger Ketukan / Tap (Untuk Mobile)
-            const logoTitle = document.getElementById('logo-title');
             let tapCount = 0;
             let tapTimeout;
 
-            logoTitle.addEventListener('click', () => {
+            logoTitle?.addEventListener('click', () => {
                 tapCount++;
-                clearTimeout(tapTimeout); // Hapus timer sebelumnya agar ketukan cepat bisa terhitung
+                clearTimeout(tapTimeout); 
 
-                if (tapCount === 5) {
+                if (tapCount === 5 && easterModal) {
                     easterModal.style.display = 'flex';
-                    tapCount = 0; // Reset setelah berhasil
+                    tapCount = 0; 
                 }
 
-                // Reset hitungan kembali ke 0 jika pengguna berhenti mengetuk selama lebih dari 1.5 detik
                 tapTimeout = setTimeout(() => {
                     tapCount = 0;
                 }, 1500);
             });
 
-            // Logika Menutup Modal
-            closeEasterBtn.addEventListener('click', () => {
-                easterModal.style.display = 'none';
+            closeEasterBtn?.addEventListener('click', () => {
+                if (easterModal) easterModal.style.display = 'none';
             });
             
             window.addEventListener('click', (e) => {
-                if (e.target === easterModal) {
+                if (easterModal && e.target === easterModal) {
                     easterModal.style.display = 'none';
                 }
             });
@@ -850,17 +1132,69 @@
             // --- Logika Karakter Imut (Mascot) ---
             const mascot = document.getElementById('cute-mascot');
             
-            setTimeout(() => {
-                mascot.classList.add('show');
-                
+            if (mascot) {
+                // Dimunculkan setelah preloader hilang (sekitar 5 detik)
                 setTimeout(() => {
-                    mascot.classList.remove('show');
-                }, 6000);
-            }, 4000);
+                    mascot.classList.add('show');
+                    
+                    setTimeout(() => {
+                        mascot.classList.remove('show');
+                    }, 6000);
+                }, 5000);
 
-            mascot.addEventListener('click', () => {
-                mascot.classList.remove('show');
+                mascot.addEventListener('click', () => {
+                    mascot.classList.remove('show');
+                });
+            }
+
+            // --- Logika Menu Hamburger (Mobile) ---
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('nav-menu');
+            
+            hamburger?.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu?.classList.toggle('active');
             });
+
+            document.querySelectorAll('nav ul li a').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger?.classList.remove('active');
+                    navMenu?.classList.remove('active');
+                });
+            });
+
+            // --- Logika Tombol Kembali ke Atas ---
+            const backToTopBtn = document.getElementById('backToTop');
+            window.addEventListener('scroll', () => {
+                if (backToTopBtn) {
+                    if (window.scrollY > 300) {
+                        backToTopBtn.classList.add('show');
+                    } else {
+                        backToTopBtn.classList.remove('show');
+                    }
+                }
+            });
+            
+            backToTopBtn?.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // --- Logika Animasi Scroll Reveal (Bisa berkali-kali) ---
+            const elementsToReveal = document.querySelectorAll('.section-title, .content-section p, .card, .action-item, .law-card, .contact-item');
+            elementsToReveal.forEach(el => el.classList.add('reveal'));
+
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    } else {
+                        // Menghapus class active saat elemen keluar layar agar bisa berulang
+                        entry.target.classList.remove('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.reveal').forEach(reveal => revealObserver.observe(reveal));
         });
     </script>
 </body>
